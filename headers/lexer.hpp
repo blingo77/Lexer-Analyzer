@@ -2,6 +2,26 @@
 #define __LEXER_H
 #include <iostream>
 
+using namespace std;
+
+enum Type{
+
+    TOKEN_ID,
+    TOKEN_INT,
+    TOKEN_EQUALS,
+    TOKEN_SEMICOLON,
+    TOKEN_LEFT_PAREN,
+    TOKEN_RIGHT_PAREN
+    
+};
+
+struct Token{
+
+    Type TYPE;
+    string VALUE;
+
+};
+
 class Lexer{
 
     public:
