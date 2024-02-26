@@ -2,6 +2,8 @@
 #include <fstream>
 #include <sstream>
 
+#include "headers/lexer.hpp"
+
 /*
 
 PUT ANY SOURCE FILES TO BE READ IN THE OUTPUT FOLDER
@@ -40,7 +42,11 @@ int main(int argc, char **argv){
     // stores buffer into a string
     std::string sourceCode = buffer.str();
 
-    std:: cout << "This is the source code: " << std:: endl << sourceCode;
+    std:: cout << "This is the source code: " << std:: endl << sourceCode << std:: endl;
+
+    Lexer lexer(sourceCode);
+
+    std::cout << "this is the end of the program" << std::endl;
 
     return 0;
 }
