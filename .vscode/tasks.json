@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "C/C++: g++.exe build active file",
+			"command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+			"args": [
+				"lexer.cpp",
+				"-o",
+				"lexer"
+			],
+
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+		}
+	]
+}
