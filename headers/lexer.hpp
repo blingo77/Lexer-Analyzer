@@ -19,7 +19,6 @@ enum Type{
 
 struct Token{
 
-    
     Type TYPE;
     string VALUE;
 
@@ -64,6 +63,8 @@ class Lexer{
 
             char temp = current;
             cursor++;
+
+            //checks if cursor is at end of file 
             current = (cursor < size) ? source[cursor] : '\0';
             return temp;
     }
@@ -75,10 +76,10 @@ class Lexer{
         }
     }
 
-    Token * tokenizeID(){
+    Token * tokenizeID(enum Type TYPE){
 
         std::stringstream buffer;
-        buffer << advance();
+        //buffer << advance();
 
         char temp;
         while(isalnum(current) || current == '_'){
@@ -88,13 +89,13 @@ class Lexer{
 
         Token * newToken = new Token();
 
-        newToken->TYPE = TOKEN_ID;
+        newToken->TYPE = TYPE;
         newToken->VALUE = buffer.str();
 
         return newToken;
     }
 
-    Token * tokenizeInt(){
+    Token * tokenizeInt(enum Type TYPE){
 
         std::stringstream buffer;
         while(isdigit(current)){
@@ -105,7 +106,7 @@ class Lexer{
         // Token() is the struct
         Token * newToken = new Token();
 
-        newToken->TYPE = TOKEN_INT;
+        newToken->TYPE = TYPE;
         newToken-> VALUE = buffer.str();
 
         return newToken;
@@ -124,24 +125,24 @@ class Lexer{
         
         std::vector<Token *> tokens;
         bool notEOF = true;
-
         
         while(cursor < size && notEOF){
             checkAndSkip();
 
             // The logic for checking if their is an ID
             if(isalpha(current) || current == '_'){  
-                tokens.push_back(tokenizeID());
+                tokens.push_back(tokenizeID(TOKEN_ID));
                 continue;
             }
 
             // This is the logic for defining integers
             if(isdigit(current)){
 
-                tokens.push_back(tokenizeInt());
+                tokens.push_back(tokenizeInt(TOKEN_INT));
                 continue;
             }
 
+            // Checks for speacial characters
             switch(current){
 
                 case ';':
