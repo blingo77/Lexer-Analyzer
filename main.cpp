@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <vector>
 
 #include "headers/lexer.hpp"
 
@@ -45,6 +46,14 @@ int main(int argc, char **argv){
     std:: cout << "This is the source code: " << std:: endl << sourceCode << std:: endl;
 
     Lexer lexer(sourceCode);
+    std::vector <Token *> tokens = lexer.tokenize();
+    int counter = 0;
+
+    for(Token * temp : tokens){
+
+        counter++;
+        std::cout << counter << ")" << "[ " + temp->VALUE + " : " << strTYPE(temp->TYPE) + " ]"<< endl; 
+    }
 
     std::cout << "this is the end of the program" << std::endl;
 
