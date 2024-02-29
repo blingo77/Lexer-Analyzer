@@ -13,7 +13,11 @@ enum Type{
     TOKEN_EQUALS, // 2
     TOKEN_SEMICOLON, // 3
     TOKEN_LEFT_PAREN, // 4
-    TOKEN_RIGHT_PAREN // 5
+    TOKEN_RIGHT_PAREN, // 5
+    TOKEN_GRETAER_THAN, //6
+    TOKEN_LESS_THAN, // 7
+    TOKEN_LEFT_BRACKET,
+    TOKEN_RIGHT_BRACKET
 
 };
 
@@ -121,6 +125,15 @@ class Lexer{
         return newToken;
     }
 
+    Token * tokenizeComparison(enum Type TYPE){
+
+        Token *newToken = new Token();
+        newToken->TYPE = TYPE;
+        newToken->VALUE = std::string(1, advance());
+
+        return newToken;
+    }
+
     std::vector<Token *> tokenize(){
         
         std::vector<Token *> tokens;
@@ -156,6 +169,12 @@ class Lexer{
                     break;
                 case ')':
                     tokens.push_back(tokenizeSpecial(TOKEN_RIGHT_PAREN));
+                    break;
+                case '[':
+                    tokens.push_back(tokenizeSpecial(TOKEN_LEFT_BRACKET));
+                    break;
+                case ']':
+                    tokens.push_back(tokenizeSpecial(TOKEN_RIGHT_BRACKET));
                     break;
                 default:
                     std::cout << " !ERROR: UNIDENTIFIED SYMBOL" << current;
